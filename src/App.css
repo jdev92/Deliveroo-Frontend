@@ -1,0 +1,178 @@
+/* GENERAL STYLE */
+/* StratosDeliverooWeb-SemiBold.eot */
+
+@font-face {
+  font-family: "Stratos Deliveroo Web";
+  src: url("./assets/fonts/StratosDeliverooWeb-SemiBold.eot");
+  src: url("./assets/fonts/StratosDeliverooWeb-SemiBold.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/StratosDeliverooWeb-SemiBold.woff2") format("woff2"),
+    url("./assets/fonts/StratosDeliverooWeb-SemiBold.woff") format("woff"),
+    url("./assets/fonts/StratosDeliverooWeb-SemiBold.ttf") format("truetype"),
+    url("./assets/fonts/StratosDeliverooWeb-SemiBold.svg#StratosDeliverooWeb-SemiBold") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("./assets/fonts/IBMPlexSans-Bold.eot");
+  src: url("./assets/fonts/IBMPlexSans-Bold.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/IBMPlexSans-Bold.woff2") format("woff2"),
+    url("./assets/fonts/IBMPlexSans-Bold.woff") format("woff"),
+    url("./assets/fonts/IBMPlexSans-Bold.ttf") format("truetype"),
+    url("./assets/fonts/IBMPlexSans-Bold.svg#IBMPlexSans-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("./assets/fonts/IBMPlexSans.eot");
+  src: url("./assets/fonts/IBMPlexSans.eot?#iefix") format("embedded-opentype"),
+    url("./assets/fonts/IBMPlexSans.woff2") format("woff2"),
+    url("./assets/fonts/IBMPlexSans.woff") format("woff"),
+    url("./assets/fonts/IBMPlexSans.ttf") format("truetype"),
+    url("./assets/fonts/IBMPlexSans.svg#IBMPlexSans") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: "IBM Plex Sans";
+  /* font-weight: ; */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
+}
+
+/* HEADER */
+
+header {
+  border-bottom: solid lightgrey 1px;
+}
+
+header img {
+  height: 50px;
+  width: 160px;
+}
+
+/* HERO */
+
+.inner-hero {
+  display: flex;
+  padding: 20px 0;
+}
+
+.hero img {
+  height: 198px;
+  border-radius: 6px;
+  margin-left: 20px;
+}
+
+.hero p {
+  font-size: 19px;
+  color: grey;
+  line-height: 29px;
+}
+
+/* MAIN */
+
+main {
+  background-color: #f3f5f5;
+  padding: 20px 0;
+}
+
+.inner-main {
+  display: flex;
+}
+
+main img {
+  height: 100px;
+}
+
+.col-left {
+  /* background-color: blue; */
+  width: 70%;
+  padding-right: 20px;
+
+}
+
+.col-right {
+  background-color: white;
+  height: 200px;
+  width: 30%;
+  border-radius: 5px;
+
+}
+
+main article {
+  background-color: white;
+  width: 48%;
+  margin-bottom: 20px;
+  width: 400px;
+  height: 160px;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+main article>div {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.meals-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.meal-description {
+  height: 33px;
+  /* background-color: red; */
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+article img {
+  height: 130px;
+  width: 130px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.meal-price {
+  margin-right: 10px;
+}
+
+.col-right p {
+  margin-bottom: 5px;
+}
