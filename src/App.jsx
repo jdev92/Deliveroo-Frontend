@@ -5,10 +5,12 @@ import './App.css';
 
 function App() {
 
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [cart, setCart] = useState([]);
+  const [data, setData] = useState(); // State pour stocker les données de l'API
+  const [isLoading, setIsLoading] = useState(true); //Statue de chargement
+  const [cart, setCart] = useState([]); // Le panier
 
+
+  // Récupérer les données de l'API au montage du composant
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,6 +35,36 @@ function App() {
     const total = subtotal + deliveryFee;
 
     return { subtotal, deliveryFee, total };
+  }
+
+  // Ajouter un repas au panier
+  const handleAddToCart = (meal) => {
+    const cartCopy = [...cart];
+    const existingMeal = cartCopy.find((elem) => elem.id === meal.id);
+
+    if (existingMeal) {
+      existingMeal.quantity++;
+    } else {
+      const obj = { ...meal, quantity: 1 }
+      cartCopy.push(obj);
+    }
+    setCart(cartCopy);
+  }
+
+  // Retirer un repas du panier
+  const handleRemoveFromCart = (meal) => {
+    const cartCopy = [...cart];
+    // Recherche de l'élément existant dans le panier avec le même id que le repas cliqué
+    const existingMeal = cart.find(elem => elem.id === meal.id);
+
+    if (existingMeal.quantity > 1) {
+      existingMeal.quantity--;
+    } else {
+      const index = cartCopy.indexOf(existingMeal)
+      console.log(index)
+      cartCopy.splice(index, 1);
+    }
+    setCart(cartCopy);
   }
 
 
@@ -69,21 +101,7 @@ function App() {
                             <div
                               // ajout d'un repas dans le panier
                               onClick={() => {
-                                console.log(meal)
-                                // Rechercher l'index de l'élément existant dans le panier avec le même id que le repas cliqué
-                                const existingMealIndex = cart.findIndex(elem => elem.id === meal.id);
-                                // Si l'élément existe déjà dans le panier
-                                if (existingMealIndex !== -1) {
-                                  // Création d'une copie du panier
-                                  const updatedCart = [...cart];
-                                  // Incrémentation de la quantité de l'élément existant
-                                  updatedCart[existingMealIndex].quantity += 1;
-                                  // Mise à jour du panier avec la nouvelle copie
-                                  setCart(updatedCart);
-                                } else {
-                                  // Si l'élément n'existe pas dans le panier, on ajoute 1
-                                  setCart([...cart, { ...meal, quantity: 1 }]);
-                                }
+                                handleAddToCart(meal);
                               }}
                             >
                               <h3>{meal.title}</h3>
@@ -93,7 +111,6 @@ function App() {
                               <span className="meal-price">{meal.price} €</span>
                               {meal.popular === true && <span>Populaire</span>}
                             </div>
-
                             {meal.picture && (
                               <img src={meal.picture} alt={meal.title} />
                             )}
@@ -109,20 +126,36 @@ function App() {
             })}
           </section>
           <section className="col-right">
-            <h2>Panier</h2>
-            <ul>
-              {/* Parcourir et afficher les repas dans le panier */}
-              {cart.map((meal) => (
-                <li key={meal.id}>
-                  <p>{meal.title}</p>
-                  <p>{meal.price} € x {meal.quantity}</p>
-                  <p>Sous-total {calculateSubtotal().subtotal} €</p>
-                  <p>Frais de livraison{calculateSubtotal().deliveryFee} €</p>
-                  <p>Total {calculateSubtotal().total} €</p>
-                </li>
-              ))}
+            {cart.length === 0 ? (
+              <h2>Votre panier  est vide</h2>
+            ) : (
+              <div>
+                {/* Parcourir et afficher les repas dans le panier */}
+                {cart.map((meal) => (
+                  <div key={meal.id}>
+                    <button onClick={() => {
+                      handleRemoveFromCart(meal)
+                    }}
+                    > -
+                    </button>
+                    <span>{meal.quantity}</span>
+                    <button onClick={() => {
+                      handleAddToCart(meal);
+                    }}
+                    > +
+                    </button>
+                    <span>{meal.title}</span>
+                    <span> {(Number(meal.price))} € x {meal.quantity}</span>
+                  </div>
+                ))}
+                <p>Frais de livraison{calculateSubtotal().deliveryFee} €</p>
+                <p>Sous-total {(calculateSubtotal().subtotal).toFixed(2)} €</p>
+                <p>Total {(calculateSubtotal().total).toFixed(2)} €</p>
 
-            </ul>
+              </div>
+            )}
+
+
           </section>
         </div>
       </main>
